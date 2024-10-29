@@ -5,10 +5,14 @@ import { URL } from "../constant";
 const fetchSuperHeroes = () => axios.get(URL);
 
 export const RQSuperHeroes = () => {
-  const { data, isLoading } = useQuery("super-heroes", fetchSuperHeroes);
+  const { data, isLoading, isError, error } = useQuery(
+    "super-heroes",
+    fetchSuperHeroes
+  );
 
   if (isLoading) return <h2>Loading . . </h2>;
 
+  if (isError) return <h2>{error}</h2>;
   return (
     <>
       <h2>RQ Super heroes</h2>
