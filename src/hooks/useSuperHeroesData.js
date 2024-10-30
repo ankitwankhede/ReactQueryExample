@@ -15,9 +15,10 @@ export const useSuperHeroesData = (onSuccess, onError) => {
     enabled: false, // false (disable on mount)
     onSuccess,
     onError,
-    select: (data) => {
-      const superHeroNames = data.data.map((hero) => hero.name);
-      return superHeroNames;
-    },
+    // // used for manipulation on response data
+    // select: (data) => {
+    //   const superHeroNames = data.data.map((hero) => hero.name);
+    //   return superHeroNames;
+    // },
   });
 };
