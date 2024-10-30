@@ -1,32 +1,27 @@
-import axios from "axios";
-import { useQuery } from "react-query";
-import { URL } from "../constant";
-
-const fetchSuperHeroes = () => axios.get(URL);
+import { useSuperHeroesData } from "../hooks/useSuperHeroesData";
 
 export const RQSuperHeroes = () => {
-  const { data, isLoading, isError, error, isFetching } = useQuery(
-    "super-heroes",
-    fetchSuperHeroes,
-    {
-      // cacheTime: 5000,
-      staleTime: 0,
-    }
-  );
+  const onSuccess = (data) => console.log(`Success  ${data}`);
+  const onError = (error) => console.log(`Error ${error}`);
+
+  const { data, isLoading, isError, error, isFetching, refetch } =
+    useSuperHeroesData(onSuccess, onError);
 
   console.log({ isLoading, isFetching });
 
-  if (isLoading) return <h2>Loading . . </h2>;
+  if (isLoading || isFetching) return <h2>Loading . . </h2>;
 
   if (isError) return <h2>{error}</h2>;
   return (
     <>
       <h2>RQ Super heroes</h2>
-      {data.data.map((hero) => (
+      <button onClick={refetch}>Refresh</button>
+      {/* {data?.data.map((hero) => (
         <div key={hero.id}>{hero.name}</div>
+      ))} */}
+      {data?.map((hero, index) => (
+        <div key={index}>{hero}</div>
       ))}
     </>
   );
-
-  return <div>RQSuperHeroes</div>;
 };
