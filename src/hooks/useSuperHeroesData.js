@@ -1,8 +1,8 @@
-import { URL } from "../constant";
+import { SUPERHEROES_URL } from "../constant";
 import axios from "axios";
 import { useQuery } from "react-query";
 
-const fetchSuperHeroes = () => axios.get(URL);
+const fetchSuperHeroes = () => axios.get(SUPERHEROES_URL);
 
 export const useSuperHeroesData = (onSuccess, onError) => {
   return useQuery("super-heroes", fetchSuperHeroes, {

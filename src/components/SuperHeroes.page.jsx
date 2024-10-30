@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { URL } from "../constant";
+import { SUPERHEROES_URL } from "../constant";
 
 export const SuperHeroes = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -9,7 +9,7 @@ export const SuperHeroes = () => {
 
   useEffect(() => {
     axios
-      .get(URL)
+      .get(SUPERHEROES_URL)
       .then((res) => {
         setData(res.data);
         setIsLoading(false);
